@@ -46,16 +46,47 @@ body::before {
 }
 
 @keyframes grain {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -10%); }
-    20% { transform: translate(-15%, 5%); }
-    30% { transform: translate(7%, -25%); }
-    40% { transform: translate(-5%, 25%); }
-    50% { transform: translate(-15%, 10%); }
-    60% { transform: translate(15%, 0%); }
-    70% { transform: translate(0%, 15%); }
-    80% { transform: translate(3%, 35%); }
-    90% { transform: translate(-10%, 10%); }
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    10% {
+        transform: translate(-5%, -10%);
+    }
+
+    20% {
+        transform: translate(-15%, 5%);
+    }
+
+    30% {
+        transform: translate(7%, -25%);
+    }
+
+    40% {
+        transform: translate(-5%, 25%);
+    }
+
+    50% {
+        transform: translate(-15%, 10%);
+    }
+
+    60% {
+        transform: translate(15%, 0%);
+    }
+
+    70% {
+        transform: translate(0%, 15%);
+    }
+
+    80% {
+        transform: translate(3%, 35%);
+    }
+
+    90% {
+        transform: translate(-10%, 10%);
+    }
 }
 
 /* === CUSTOM CURSOR === */
@@ -152,7 +183,9 @@ body::before {
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 /* === CTA BUTTON === */
@@ -483,12 +516,24 @@ body::before {
     transition: all 0.3s ease;
 }
 
-.form-group input:focus + label,
-.form-group input:valid + label,
-.form-group select:focus + label,
-.form-group select:valid + label,
-.form-group textarea:focus + label,
-.form-group textarea:valid + label {
+.form-group input:focus+label,
+.form-group input:valid+label,
+.form-group select:focus+label,
+.form-group select:not([value=""]):valid+label,
+.form-group textarea:focus+label,
+.form-group textarea:valid+label {
+    top: -1rem;
+    font-size: 0.75rem;
+    color: var(--acid-green);
+}
+
+/* Fix for select with disabled empty option */
+.form-group select:has(option[disabled]:checked)+label {
+    top: 1rem;
+    color: rgba(240, 240, 240, 0.5);
+}
+
+.form-group select:not(:has(option[disabled]:checked))+label {
     top: -1rem;
     font-size: 0.75rem;
     color: var(--acid-green);
@@ -598,6 +643,35 @@ body::before {
     max-height: 90vh;
     object-fit: contain;
     z-index: 2;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--off-white);
+    font-size: 3rem;
+    font-weight: 300;
+    cursor: none;
+    z-index: 3;
+    transition: color 0.3s ease, opacity 0.3s ease;
+    padding: 1rem 1.5rem;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    color: var(--acid-green);
+}
+
+.lightbox-prev {
+    left: 2rem;
+}
+
+.lightbox-next {
+    right: 2rem;
 }
 
 /* === RESPONSIVE === */

@@ -13,7 +13,7 @@ let followerY = 0;
 document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    
+
     cursor.style.left = mouseX + 'px';
     cursor.style.top = mouseY + 'px';
 });
@@ -22,13 +22,13 @@ document.addEventListener('mousemove', (e) => {
 function animateFollower() {
     const dx = mouseX - followerX;
     const dy = mouseY - followerY;
-    
+
     followerX += dx * 0.1;
     followerY += dy * 0.1;
-    
+
     cursorFollower.style.left = followerX + 'px';
     cursorFollower.style.top = followerY + 'px';
-    
+
     requestAnimationFrame(animateFollower);
 }
 animateFollower();
@@ -51,19 +51,19 @@ const portfolioItems = document.querySelectorAll('.portfolio-item');
 filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
-        
+
         // Update active button
         filterButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
+
         // Filter items with smooth animation
         portfolioItems.forEach(item => {
             const category = item.getAttribute('data-category');
-            
+
             if (filter === 'all' || category === filter) {
                 item.style.opacity = '0';
                 item.style.transform = 'scale(0.8)';
-                
+
                 setTimeout(() => {
                     item.classList.remove('hide');
                     item.style.opacity = '1';
@@ -72,7 +72,7 @@ filterButtons.forEach(btn => {
             } else {
                 item.style.opacity = '0';
                 item.style.transform = 'scale(0.8)';
-                
+
                 setTimeout(() => {
                     item.classList.add('hide');
                 }, 300);
@@ -85,17 +85,47 @@ filterButtons.forEach(btn => {
 const lightbox = document.getElementById('lightbox');
 const lightboxImage = document.getElementById('lightboxImage');
 const closeLightbox = document.getElementById('closeLightbox');
+const lightboxPrev = document.getElementById('lightboxPrev');
+const lightboxNext = document.getElementById('lightboxNext');
+let currentImageIndex = 0;
+let visiblePortfolioItems = [];
 
-portfolioItems.forEach(item => {
+// Function to update visible items based on current filter
+function updateVisibleItems() {
+    visiblePortfolioItems = Array.from(portfolioItems).filter(item => !item.classList.contains('hide'));
+}
+
+// Function to show image at specific index
+function showLightboxImage(index) {
+    updateVisibleItems();
+    if (visiblePortfolioItems.length === 0) return;
+
+    // Wrap around if index is out of bounds
+    if (index < 0) {
+        currentImageIndex = visiblePortfolioItems.length - 1;
+    } else if (index >= visiblePortfolioItems.length) {
+        currentImageIndex = 0;
+    } else {
+        currentImageIndex = index;
+    }
+
+    const img = visiblePortfolioItems[currentImageIndex].querySelector('img');
+    lightboxImage.src = img.src;
+    lightboxImage.alt = img.alt;
+}
+
+// Open lightbox on portfolio item click
+portfolioItems.forEach((item, index) => {
     item.addEventListener('click', () => {
-        const img = item.querySelector('img');
-        lightboxImage.src = img.src;
-        lightboxImage.alt = img.alt;
+        updateVisibleItems();
+        currentImageIndex = visiblePortfolioItems.indexOf(item);
+        showLightboxImage(currentImageIndex);
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     });
 });
 
+// Close lightbox
 closeLightbox.addEventListener('click', () => {
     lightbox.classList.remove('active');
     document.body.style.overflow = 'auto';
@@ -106,6 +136,16 @@ document.querySelector('.lightbox-backdrop').addEventListener('click', () => {
     document.body.style.overflow = 'auto';
 });
 
+// Previous image
+lightboxPrev.addEventListener('click', () => {
+    showLightboxImage(currentImageIndex - 1);
+});
+
+// Next image
+lightboxNext.addEventListener('click', () => {
+    showLightboxImage(currentImageIndex + 1);
+});
+
 // === ACCORDION ===
 const accordionHeaders = document.querySelectorAll('.accordion-header');
 
@@ -113,12 +153,12 @@ accordionHeaders.forEach(header => {
     header.addEventListener('click', () => {
         const item = header.parentElement;
         const isActive = item.classList.contains('active');
-        
+
         // Close all items
         document.querySelectorAll('.accordion-item').forEach(i => {
             i.classList.remove('active');
         });
-        
+
         // Toggle current item
         if (!isActive) {
             item.classList.add('active');
@@ -149,7 +189,7 @@ document.querySelector('.modal-backdrop').addEventListener('click', () => {
 
 bookingForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    
+
     // Get form data
     const formData = {
         name: document.getElementById('name').value,
@@ -158,13 +198,13 @@ bookingForm.addEventListener('submit', (e) => {
         artist: document.getElementById('artist').value,
         description: document.getElementById('description').value
     };
-    
+
     // Log form data (replace with actual submission logic)
     console.log('Booking Request:', formData);
-    
+
     // Show success message
-    alert('Request submitted! We\'ll contact you within 24 hours.');
-    
+    alert('Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei dir.');
+
     // Reset form and close modal
     bookingForm.reset();
     bookingModal.classList.remove('active');
@@ -178,7 +218,7 @@ const heroTitle = document.querySelector('.hero-title');
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const parallaxSpeed = 0.5;
-    
+
     if (heroTitle) {
         heroTitle.style.transform = `translateY(${scrolled * parallaxSpeed}px)`;
     }
@@ -198,8 +238,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// === ESCAPE KEY TO CLOSE MODALS ===
+// === KEYBOARD CONTROLS ===
 document.addEventListener('keydown', (e) => {
+    // Escape key to close modals
     if (e.key === 'Escape') {
         if (bookingModal.classList.contains('active')) {
             bookingModal.classList.remove('active');
@@ -208,6 +249,15 @@ document.addEventListener('keydown', (e) => {
         if (lightbox.classList.contains('active')) {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
+        }
+    }
+
+    // Arrow keys for lightbox navigation
+    if (lightbox.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') {
+            showLightboxImage(currentImageIndex - 1);
+        } else if (e.key === 'ArrowRight') {
+            showLightboxImage(currentImageIndex + 1);
         }
     }
 });
