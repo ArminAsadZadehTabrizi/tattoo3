@@ -674,6 +674,202 @@ body::before {
     right: 2rem;
 }
 
+/* === LANGUAGE TOGGLE === */
+.lang-toggle {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: rgba(240, 240, 240, 0.5);
+    cursor: none;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.lang-btn.active {
+    color: var(--acid-green);
+}
+
+.lang-btn:hover {
+    color: var(--off-white);
+}
+
+.lang-separator {
+    color: rgba(240, 240, 240, 0.3);
+}
+
+/* === INSTAGRAM SECTION === */
+.instagram-section {
+    padding: clamp(3rem, 8vh, 6rem) 0;
+    background: linear-gradient(90deg, var(--almost-black) 0%, rgba(204, 255, 0, 0.05) 50%, var(--almost-black) 100%);
+}
+
+.instagram-banner {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.2rem, 4vw, 2.5rem);
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--acid-green);
+    text-decoration: none;
+    padding: 3rem 2rem;
+    border: 2px solid var(--acid-green);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-smooth);
+}
+
+.instagram-banner::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: var(--off-white);
+    animation: marquee 3s linear infinite;
+}
+
+@keyframes marquee {
+    to {
+        left: 100%;
+    }
+}
+
+.instagram-banner:hover {
+    background: var(--acid-green);
+    color: var(--almost-black);
+}
+
+/* === FOOTER === */
+.footer {
+    padding: clamp(4rem, 8vh, 6rem) 0 2rem;
+    background-color: rgba(18, 18, 18, 0.5);
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.footer-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    color: var(--acid-green);
+}
+
+.footer p {
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.6rem;
+}
+
+.footer-links a {
+    color: var(--off-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--acid-green);
+}
+
+.footer-hygiene {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    line-height: 1.6;
+}
+
+.footer-rules {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--acid-green);
+    margin-top: 0.5rem;
+    line-height: 1.6;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-bottom p {
+    font-size: 0.75rem;
+    opacity: 0.5;
+}
+
+/* === DEPOSIT NOTICE === */
+.deposit-notice {
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--acid-green);
+    background: rgba(204, 255, 0, 0.05);
+    border-left: 3px solid var(--acid-green);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    line-height: 1.6;
+}
+
+/* === IMPROVED FORM LABEL POSITIONING === */
+.form-group input:focus+label,
+.form-group input:not(:placeholder-shown)+label,
+.form-group select:focus+label,
+.form-group select:not([value=""]):valid+label,
+.form-group textarea:focus+label,
+.form-group textarea:not(:placeholder-shown)+label {
+    top: -1rem;
+    font-size: 0.75rem;
+    color: var(--acid-green);
+}
+
+/* Fix for select initial state */
+.form-group select:has(option[disabled]:not(:checked))+label {
+    top: -1rem;
+    font-size: 0.75rem;
+    color: var(--acid-green);
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     body {
@@ -683,6 +879,12 @@ body::before {
     .cursor,
     .cursor-follower {
         display: none;
+    }
+
+    .lang-toggle {
+        top: 1rem;
+        right: 1rem;
+        font-size: 0.75rem;
     }
 
     .filter-buttons {
@@ -699,5 +901,15 @@ body::before {
 
     .modal-content {
         padding: 2rem;
+    }
+
+    .instagram-banner {
+        font-size: clamp(1rem, 3vw, 1.5rem);
+        padding: 2rem 1rem;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 }

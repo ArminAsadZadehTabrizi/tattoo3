@@ -2,6 +2,150 @@
 // VELVET INK — Berlin Underground JavaScript
 // ========================================
 
+// === TRANSLATION SYSTEM ===
+const translations = {
+    de: {
+        // Hero
+        hero_cta: "Session buchen",
+
+        // Artists
+        artists_title: "Künstler",
+
+        // Portfolio
+        portfolio_title: "Portfolio",
+        filter_all: "Alle",
+        filter_traditional: "Traditional",
+        filter_geometric: "Geometrisch",
+        filter_blackwork: "Blackwork",
+        filter_illustrative: "Illustrativ",
+
+        // Instagram
+        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @VELVET.INK",
+
+        // Aftercare
+        aftercare_title: "Pflege",
+        aftercare_day1_title: "Erste 24 Stunden",
+        aftercare_day1_text: "Verband 2-4 Stunden drauf lassen. Vorsichtig mit antibakterieller Seife und lauwarmem Wasser waschen. Mit sauberem Handtuch trockentupfen. Dünne Schicht Heilsalbe auftragen.",
+        aftercare_week1_title: "Woche 1",
+        aftercare_week1_text: "2-3 mal täglich waschen. Parfümfreie Feuchtigkeitscreme auftragen. Sonne, Schwimmen und enge Kleidung vermeiden. Nicht kratzen oder Kruste abziehen.",
+        aftercare_week2_title: "Woche 2-4",
+        aftercare_week2_text: "Weiter eincremen. Leichtes Abschälen ist normal. Bereich vor Sonne schützen. Dein Tattoo sollte bis Woche 4 vollständig verheilt sein.",
+        aftercare_longterm_title: "Langzeitpflege",
+        aftercare_longterm_text: "Immer SPF 50+ Sonnencreme benutzen. Regelmäßig eincremen. Touch-ups bei Bedarf vereinbaren. Längeren Kontakt mit Wasser vermeiden.",
+
+        // Footer
+        footer_contact: "Kontakt",
+        footer_links: "Links",
+        footer_artists: "Künstler",
+        footer_portfolio: "Portfolio",
+        footer_aftercare: "Pflege",
+        footer_vouchers: "Gutscheine / Gift Cards",
+        footer_rules_title: "Rules & Safety",
+        footer_hygiene: "100% Sterile Single-Use Equipment. EU REACH Compliant Colors.",
+        footer_rules: "NO RACISM. NO SEXISM. WE REFUSE HATE SYMBOLS.",
+
+        // Booking Modal
+        modal_title: "Session buchen",
+        form_name: "Name",
+        form_email: "E-Mail",
+        form_phone: "Telefon",
+        form_artist: "Künstler",
+        form_description: "Motiv-Beschreibung",
+        deposit_notice: "Hinweis: Für feste Termine ist eine Anzahlung von 50€ erforderlich.",
+        form_submit: "Anfrage senden",
+        success_message: "Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei dir."
+    },
+    en: {
+        // Hero
+        hero_cta: "Book Session",
+
+        // Artists
+        artists_title: "Artists",
+
+        // Portfolio
+        portfolio_title: "Portfolio",
+        filter_all: "All",
+        filter_traditional: "Traditional",
+        filter_geometric: "Geometric",
+        filter_blackwork: "Blackwork",
+        filter_illustrative: "Illustrative",
+
+        // Instagram
+        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @VELVET.INK",
+
+        // Aftercare
+        aftercare_title: "Aftercare",
+        aftercare_day1_title: "First 24 Hours",
+        aftercare_day1_text: "Leave bandage on for 2-4 hours. Gently wash with antibacterial soap and lukewarm water. Pat dry with a clean towel. Apply a thin layer of healing ointment.",
+        aftercare_week1_title: "Week 1",
+        aftercare_week1_text: "Wash 2-3 times daily. Apply fragrance-free moisturizer. Avoid sun, swimming, and tight clothing. Do not scratch or peel the scab.",
+        aftercare_week2_title: "Week 2-4",
+        aftercare_week2_text: "Continue moisturizing. Light peeling is normal. Protect area from sun. Your tattoo should be fully healed by week 4.",
+        aftercare_longterm_title: "Long-Term Care",
+        aftercare_longterm_text: "Always use SPF 50+ sunscreen. Moisturize regularly. Schedule touch-ups as needed. Avoid prolonged contact with water.",
+
+        // Footer
+        footer_contact: "Contact",
+        footer_links: "Links",
+        footer_artists: "Artists",
+        footer_portfolio: "Portfolio",
+        footer_aftercare: "Aftercare",
+        footer_vouchers: "Gift Cards / Gutscheine",
+        footer_rules_title: "Rules & Safety",
+        footer_hygiene: "100% Sterile Single-Use Equipment. EU REACH Compliant Colors.",
+        footer_rules: "NO RACISM. NO SEXISM. WE REFUSE HATE SYMBOLS.",
+
+        // Booking Modal
+        modal_title: "Book Session",
+        form_name: "Name",
+        form_email: "Email",
+        form_phone: "Phone",
+        form_artist: "Artist",
+        form_description: "Design Description",
+        deposit_notice: "Note: A 50€ deposit is required to secure your appointment.",
+        form_submit: "Send Request",
+        success_message: "Request sent! We'll get back to you within 24 hours."
+    }
+};
+
+// Get saved language or default to German
+let currentLang = localStorage.getItem('velvetink_lang') || 'de';
+
+// Function to change language
+function changeLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('velvetink_lang', lang);
+
+    // Update all elements with data-i18n attribute
+    document.querySelectorAll('[data-i18n]').forEach(element => {
+        const key = element.getAttribute('data-i18n');
+        if (translations[lang] && translations[lang][key]) {
+            element.textContent = translations[lang][key];
+        }
+    });
+
+    // Update language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-lang') === lang) {
+            btn.classList.add('active');
+        }
+    });
+}
+
+// Initialize language on page load
+document.addEventListener('DOMContentLoaded', () => {
+    changeLanguage(currentLang);
+
+    // Add event listeners to language buttons
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            changeLanguage(lang);
+        });
+    });
+});
+
 // === CUSTOM CURSOR ===
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
@@ -202,8 +346,8 @@ bookingForm.addEventListener('submit', (e) => {
     // Log form data (replace with actual submission logic)
     console.log('Booking Request:', formData);
 
-    // Show success message
-    alert('Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei dir.');
+    // Show success message in current language
+    alert(translations[currentLang].success_message);
 
     // Reset form and close modal
     bookingForm.reset();

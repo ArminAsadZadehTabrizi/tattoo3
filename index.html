@@ -19,24 +19,31 @@
     <div class="cursor"></div>
     <div class="cursor-follower"></div>
 
+    <!-- Language Toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="de">DE</button>
+        <span class="lang-separator">|</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title" data-scroll>VELVET INK</h1>
             <p class="hero-subtitle">Düsseldorf / Underground / Ink</p>
-            <button class="cta-btn" id="heroBookingBtn">Session buchen</button>
+            <button class="cta-btn" id="heroBookingBtn" data-i18n="hero_cta">Session buchen</button>
         </div>
     </section>
 
     <!-- Artists Section -->
     <section class="artists" id="artists">
         <div class="container">
-            <h2 class="section-title">Künstler</h2>
+            <h2 class="section-title" data-i18n="artists_title">Künstler</h2>
             <div class="artists-grid">
                 <div class="artist-card">
                     <div class="artist-image">
                         <img src="https://images.unsplash.com/photo-1568515387631-8b650bbcdb90?auto=format&fit=crop&w=600&h=800&q=80"
-                            alt="Künstler Mike">
+                            alt="Künstler Mike" loading="lazy">
                     </div>
                     <div class="artist-info">
                         <h3>Mike</h3>
@@ -46,7 +53,7 @@
                 <div class="artist-card">
                     <div class="artist-image">
                         <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?auto=format&fit=crop&w=600&h=800&q=80"
-                            alt="Künstler Sarah">
+                            alt="Künstler Sarah" loading="lazy">
                     </div>
                     <div class="artist-info">
                         <h3>Sarah</h3>
@@ -56,7 +63,7 @@
                 <div class="artist-card">
                     <div class="artist-image">
                         <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&h=800&q=80"
-                            alt="Künstler Alex">
+                            alt="Künstler Alex" loading="lazy">
                     </div>
                     <div class="artist-info">
                         <h3>Alex</h3>
@@ -66,7 +73,7 @@
                 <div class="artist-card">
                     <div class="artist-image">
                         <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&h=800&q=80"
-                            alt="Künstler Nina">
+                            alt="Künstler Nina" loading="lazy">
                     </div>
                     <div class="artist-info">
                         <h3>Nina</h3>
@@ -80,93 +87,108 @@
     <!-- Portfolio Section -->
     <section class="portfolio" id="portfolio">
         <div class="container">
-            <h2 class="section-title">Portfolio</h2>
+            <h2 class="section-title" data-i18n="portfolio_title">Portfolio</h2>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Alle</button>
-                <button class="filter-btn" data-filter="traditional">Traditional</button>
-                <button class="filter-btn" data-filter="geometric">Geometrisch</button>
-                <button class="filter-btn" data-filter="blackwork">Blackwork</button>
-                <button class="filter-btn" data-filter="illustrative">Illustrativ</button>
+                <button class="filter-btn active" data-filter="all" data-i18n="filter_all">Alle</button>
+                <button class="filter-btn" data-filter="traditional" data-i18n="filter_traditional">Traditional</button>
+                <button class="filter-btn" data-filter="geometric" data-i18n="filter_geometric">Geometrisch</button>
+                <button class="filter-btn" data-filter="blackwork" data-i18n="filter_blackwork">Blackwork</button>
+                <button class="filter-btn" data-filter="illustrative"
+                    data-i18n="filter_illustrative">Illustrativ</button>
             </div>
             <div class="portfolio-grid">
                 <div class="portfolio-item" data-category="traditional">
                     <img src="https://images.unsplash.com/photo-1611501275019-9b5cda994e8d?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Traditional Tattoo">
+                        alt="Traditional Tattoo" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="geometric">
                     <img src="https://images.unsplash.com/photo-1598875791852-8bb153383f9d?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Geometrisches Tattoo">
+                        alt="Geometrisches Tattoo" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="blackwork">
                     <img src="https://images.unsplash.com/photo-1590246814883-57c1c0e90747?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Blackwork Tattoo">
+                        alt="Blackwork Tattoo" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="illustrative">
                     <img src="https://images.unsplash.com/photo-1565058381374-435e81ac42f7?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Illustratives Tattoo">
+                        alt="Illustratives Tattoo" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="traditional">
                     <img src="https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Traditional Tattoo 2">
+                        alt="Traditional Tattoo 2" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="geometric">
                     <img src="https://images.unsplash.com/photo-1598875791493-e74c3c700e41?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Geometrisches Tattoo 2">
+                        alt="Geometrisches Tattoo 2" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="blackwork">
                     <img src="https://images.unsplash.com/photo-1516654935630-fail5d3238af?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Blackwork Tattoo 2">
+                        alt="Blackwork Tattoo 2" loading="lazy">
                 </div>
                 <div class="portfolio-item" data-category="illustrative">
                     <img src="https://images.unsplash.com/photo-1590246815143-b5e0ff3f8d7d?auto=format&fit=crop&w=600&h=600&q=80"
-                        alt="Illustratives Tattoo 2">
+                        alt="Illustratives Tattoo 2" loading="lazy">
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Instagram Section ("Fresh Ink") -->
+    <section class="instagram-section">
+        <div class="container">
+            <a href="https://www.instagram.com/velvet.ink" target="_blank" class="instagram-banner"
+                data-i18n="instagram_banner">
+                CHECK INSTAGRAM FOR DAILY DROPS // @VELVET.INK
+            </a>
         </div>
     </section>
 
     <!-- Aftercare Section -->
     <section class="aftercare" id="aftercare">
         <div class="container">
-            <h2 class="section-title">Pflege</h2>
+            <h2 class="section-title" data-i18n="aftercare_title">Pflege</h2>
             <div class="accordion">
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>Erste 24 Stunden</span>
+                        <span data-i18n="aftercare_day1_title">Erste 24 Stunden</span>
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Verband 2-4 Stunden drauf lassen. Vorsichtig mit antibakterieller Seife und lauwarmem Wasser
+                        <p data-i18n="aftercare_day1_text">Verband 2-4 Stunden drauf lassen. Vorsichtig mit
+                            antibakterieller Seife und lauwarmem Wasser
                             waschen. Mit sauberem Handtuch trockentupfen. Dünne Schicht Heilsalbe auftragen.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>Woche 1</span>
+                        <span data-i18n="aftercare_week1_title">Woche 1</span>
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>2-3 mal täglich waschen. Parfümfreie Feuchtigkeitscreme auftragen. Sonne, Schwimmen und enge
+                        <p data-i18n="aftercare_week1_text">2-3 mal täglich waschen. Parfümfreie Feuchtigkeitscreme
+                            auftragen. Sonne, Schwimmen und enge
                             Kleidung vermeiden. Nicht kratzen oder Kruste abziehen.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>Woche 2-4</span>
+                        <span data-i18n="aftercare_week2_title">Woche 2-4</span>
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Weiter eincremen. Leichtes Abschälen ist normal. Bereich vor Sonne schützen. Dein Tattoo
+                        <p data-i18n="aftercare_week2_text">Weiter eincremen. Leichtes Abschälen ist normal. Bereich vor
+                            Sonne schützen. Dein Tattoo
                             sollte bis Woche 4 vollständig verheilt sein.</p>
                     </div>
                 </div>
                 <div class="accordion-item">
                     <button class="accordion-header">
-                        <span>Langzeitpflege</span>
+                        <span data-i18n="aftercare_longterm_title">Langzeitpflege</span>
                         <span class="accordion-icon">+</span>
                     </button>
                     <div class="accordion-content">
-                        <p>Immer SPF 50+ Sonnencreme benutzen. Regelmäßig eincremen. Touch-ups bei Bedarf vereinbaren.
+                        <p data-i18n="aftercare_longterm_text">Immer SPF 50+ Sonnencreme benutzen. Regelmäßig eincremen.
+                            Touch-ups bei Bedarf vereinbaren.
                             Längeren Kontakt mit Wasser vermeiden.</p>
                     </div>
                 </div>
@@ -174,24 +196,59 @@
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3 class="footer-title" data-i18n="footer_contact">Kontakt</h3>
+                    <p>VELVET INK Studio</p>
+                    <p>Bolkerstraße 23</p>
+                    <p>40213 Düsseldorf</p>
+                    <p style="margin-top: 1rem;">kontakt@velvetink.de</p>
+                    <p>+49 (0) 211 123 456</p>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title" data-i18n="footer_links">Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#artists" data-i18n="footer_artists">Künstler</a></li>
+                        <li><a href="#portfolio" data-i18n="footer_portfolio">Portfolio</a></li>
+                        <li><a href="#aftercare" data-i18n="footer_aftercare">Pflege</a></li>
+                        <li><a href="mailto:gutscheine@velvetink.de" data-i18n="footer_vouchers">Gutscheine / Gift
+                                Cards</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3 class="footer-title" data-i18n="footer_rules_title">Rules & Safety</h3>
+                    <p class="footer-hygiene" data-i18n="footer_hygiene">100% Sterile Single-Use Equipment. EU REACH
+                        Compliant Colors.</p>
+                    <p class="footer-rules" data-i18n="footer_rules">NO RACISM. NO SEXISM. WE REFUSE HATE SYMBOLS.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 VELVET INK. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
     <!-- Booking Modal -->
     <div class="modal" id="bookingModal">
         <div class="modal-backdrop"></div>
         <div class="modal-content">
             <button class="modal-close" id="closeModal">&times;</button>
-            <h2 class="modal-title">Session buchen</h2>
+            <h2 class="modal-title" data-i18n="modal_title">Session buchen</h2>
             <form class="booking-form" id="bookingForm">
                 <div class="form-group">
                     <input type="text" id="name" required>
-                    <label for="name">Name</label>
+                    <label for="name" data-i18n="form_name">Name</label>
                 </div>
                 <div class="form-group">
                     <input type="email" id="email" required>
-                    <label for="email">E-Mail</label>
+                    <label for="email" data-i18n="form_email">E-Mail</label>
                 </div>
                 <div class="form-group">
                     <input type="tel" id="phone" required>
-                    <label for="phone">Telefon</label>
+                    <label for="phone" data-i18n="form_phone">Telefon</label>
                 </div>
                 <div class="form-group">
                     <select id="artist" required>
@@ -201,13 +258,16 @@
                         <option value="alex">Alex</option>
                         <option value="nina">Nina</option>
                     </select>
-                    <label for="artist">Künstler</label>
+                    <label for="artist" data-i18n="form_artist">Künstler</label>
                 </div>
                 <div class="form-group">
                     <textarea id="description" rows="4" required></textarea>
-                    <label for="description">Motiv-Beschreibung</label>
+                    <label for="description" data-i18n="form_description">Motiv-Beschreibung</label>
                 </div>
-                <button type="submit" class="submit-btn">Anfrage senden</button>
+                <div class="deposit-notice" data-i18n="deposit_notice">
+                    Hinweis: Für feste Termine ist eine Anzahlung von 50€ erforderlich.
+                </div>
+                <button type="submit" class="submit-btn" data-i18n="form_submit">Anfrage senden</button>
             </form>
         </div>
     </div>
