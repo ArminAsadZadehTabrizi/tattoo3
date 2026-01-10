@@ -51,9 +51,22 @@ const translations = {
         form_phone: "Telefon",
         form_artist: "Künstler",
         form_description: "Motiv-Beschreibung",
-        deposit_notice: "Hinweis: Für feste Termine ist eine Anzahlung von 50€ erforderlich.",
+        deposit_notice: "Hinweis: Nach Bestätigung des Termins erhältst du einen Link zur Zahlung der Anzahlung (50€).",
         form_submit: "Anfrage senden",
-        success_message: "Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei dir."
+        success_message: "Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei dir.",
+
+        // Voucher Modal
+        voucher_modal_title: "Gutschein bestellen",
+        voucher_amount: "Betrag",
+        voucher_amount_50: "50€",
+        voucher_amount_100: "100€",
+        voucher_amount_150: "150€",
+        voucher_amount_200: "200€",
+        voucher_amount_custom: "Individuell",
+        voucher_recipient: "Name des Empfängers",
+        voucher_email: "Deine E-Mail",
+        voucher_submit: "Gutschein anfordern",
+        voucher_success: "Rechnung wird erstellt! Du erhältst den Gutschein nach Zahlungseingang per Mail."
     },
     en: {
         // Hero
@@ -102,9 +115,22 @@ const translations = {
         form_phone: "Phone",
         form_artist: "Artist",
         form_description: "Design Description",
-        deposit_notice: "Note: A 50€ deposit is required to secure your appointment.",
+        deposit_notice: "Note: After appointment confirmation, you will receive a link to pay the deposit (50€).",
         form_submit: "Send Request",
-        success_message: "Request sent! We'll get back to you within 24 hours."
+        success_message: "Request sent! We'll get back to you within 24 hours.",
+
+        // Voucher Modal
+        voucher_modal_title: "Order Gift Card",
+        voucher_amount: "Amount",
+        voucher_amount_50: "50€",
+        voucher_amount_100: "100€",
+        voucher_amount_150: "150€",
+        voucher_amount_200: "200€",
+        voucher_amount_custom: "Custom",
+        voucher_recipient: "Recipient Name",
+        voucher_email: "Your Email",
+        voucher_submit: "Request Voucher",
+        voucher_success: "Invoice will be created! You will receive the gift card via email after payment is confirmed."
     }
 };
 
@@ -394,6 +420,11 @@ document.addEventListener('keydown', (e) => {
             lightbox.classList.remove('active');
             document.body.style.overflow = 'auto';
         }
+        const voucherModal = document.getElementById('voucherModal');
+        if (voucherModal && voucherModal.classList.contains('active')) {
+            voucherModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
     }
 
     // Arrow keys for lightbox navigation
@@ -405,3 +436,58 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+// === VOUCHER MODAL ===
+const voucherModal = document.getElementById('voucherModal');
+const voucherTrigger = document.getElementById('voucherTrigger');
+const closeVoucherModal = document.getElementById('closeVoucherModal');
+const voucherForm = document.getElementById('voucherForm');
+
+if (voucherTrigger) {
+    voucherTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        voucherModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+if (closeVoucherModal) {
+    closeVoucherModal.addEventListener('click', () => {
+        voucherModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+}
+
+if (voucherModal) {
+    const voucherBackdrop = voucherModal.querySelector('.modal-backdrop');
+    if (voucherBackdrop) {
+        voucherBackdrop.addEventListener('click', () => {
+            voucherModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    }
+}
+
+if (voucherForm) {
+    voucherForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const formData = {
+            amount: document.getElementById('voucherAmount').value,
+            recipient: document.getElementById('voucherRecipient').value,
+            email: document.getElementById('voucherEmail').value
+        };
+
+        // Log form data (replace with actual submission logic)
+        console.log('Voucher Request:', formData);
+
+        // Show success message in current language
+        alert(translations[currentLang].voucher_success);
+
+        // Reset form and close modal
+        voucherForm.reset();
+        voucherModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+}

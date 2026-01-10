@@ -533,7 +533,8 @@ body::before {
     color: rgba(240, 240, 240, 0.5);
 }
 
-.form-group select:not(:has(option[disabled]:checked))+label {
+.form-group select:not(:has(option[disabled]:checked))+label,
+.form-group select:valid:not(:has(option[disabled]:checked))+label {
     top: -1rem;
     font-size: 0.75rem;
     color: var(--acid-green);

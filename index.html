@@ -214,7 +214,7 @@
                         <li><a href="#artists" data-i18n="footer_artists">Künstler</a></li>
                         <li><a href="#portfolio" data-i18n="footer_portfolio">Portfolio</a></li>
                         <li><a href="#aftercare" data-i18n="footer_aftercare">Pflege</a></li>
-                        <li><a href="mailto:gutscheine@velvetink.de" data-i18n="footer_vouchers">Gutscheine / Gift
+                        <li><a href="#" id="voucherTrigger" data-i18n="footer_vouchers">Gutscheine / Gift
                                 Cards</a></li>
                     </ul>
                 </div>
@@ -265,12 +265,44 @@
                     <label for="description" data-i18n="form_description">Motiv-Beschreibung</label>
                 </div>
                 <div class="deposit-notice" data-i18n="deposit_notice">
-                    Hinweis: Für feste Termine ist eine Anzahlung von 50€ erforderlich.
+                    Hinweis: Nach Bestätigung des Termins erhältst du einen Link zur Zahlung der Anzahlung (50€).
                 </div>
                 <button type="submit" class="submit-btn" data-i18n="form_submit">Anfrage senden</button>
             </form>
         </div>
     </div>
+
+    <!-- Voucher Modal -->
+    <div class="modal" id="voucherModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="closeVoucherModal">&times;</button>
+            <h2 class="modal-title" data-i18n="voucher_modal_title">Gutschein bestellen</h2>
+            <form class="booking-form" id="voucherForm">
+                <div class="form-group">
+                    <select id="voucherAmount" required>
+                        <option value="" disabled selected></option>
+                        <option value="50" data-i18n="voucher_amount_50">50€</option>
+                        <option value="100" data-i18n="voucher_amount_100">100€</option>
+                        <option value="150" data-i18n="voucher_amount_150">150€</option>
+                        <option value="200" data-i18n="voucher_amount_200">200€</option>
+                        <option value="custom" data-i18n="voucher_amount_custom">Individuell</option>
+                    </select>
+                    <label for="voucherAmount" data-i18n="voucher_amount">Betrag</label>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="voucherRecipient" required>
+                    <label for="voucherRecipient" data-i18n="voucher_recipient">Name des Empfängers</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="voucherEmail" required>
+                    <label for="voucherEmail" data-i18n="voucher_email">Deine E-Mail</label>
+                </div>
+                <button type="submit" class="submit-btn" data-i18n="voucher_submit">Gutschein anfordern</button>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
