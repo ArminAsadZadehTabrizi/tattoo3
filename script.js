@@ -8,6 +8,10 @@ const translations = {
         // Hero
         hero_cta: "Session buchen",
 
+        // Header
+        header_vouchers: "Gutscheine",
+        header_book: "Buchen",
+
         // Artists
         artists_title: "Künstler",
 
@@ -40,9 +44,13 @@ const translations = {
         footer_portfolio: "Portfolio",
         footer_aftercare: "Pflege",
         footer_vouchers: "Gutscheine / Gift Cards",
+        footer_social: "Social Media",
         footer_rules_title: "Rules & Safety",
         footer_hygiene: "100% Sterile Single-Use Equipment. EU REACH Compliant Colors.",
         footer_rules: "NO RACISM. NO SEXISM. WE REFUSE HATE SYMBOLS.",
+        footer_impressum: "Impressum",
+        footer_datenschutz: "Datenschutz",
+        footer_agb: "AGB",
 
         // Booking Modal
         modal_title: "Session buchen",
@@ -71,6 +79,10 @@ const translations = {
     en: {
         // Hero
         hero_cta: "Book Session",
+
+        // Header
+        header_vouchers: "Gift Cards",
+        header_book: "Book",
 
         // Artists
         artists_title: "Artists",
@@ -104,9 +116,13 @@ const translations = {
         footer_portfolio: "Portfolio",
         footer_aftercare: "Aftercare",
         footer_vouchers: "Gift Cards / Gutscheine",
+        footer_social: "Social Media",
         footer_rules_title: "Rules & Safety",
         footer_hygiene: "100% Sterile Single-Use Equipment. EU REACH Compliant Colors.",
         footer_rules: "NO RACISM. NO SEXISM. WE REFUSE HATE SYMBOLS.",
+        footer_impressum: "Legal Notice",
+        footer_datenschutz: "Privacy Policy",
+        footer_agb: "Terms & Conditions",
 
         // Booking Modal
         modal_title: "Book Session",
@@ -339,6 +355,7 @@ accordionHeaders.forEach(header => {
 // === BOOKING MODAL ===
 const bookingModal = document.getElementById('bookingModal');
 const heroBookingBtn = document.getElementById('heroBookingBtn');
+const headerBookingBtn = document.getElementById('headerBookingBtn');
 const closeModal = document.getElementById('closeModal');
 const bookingForm = document.getElementById('bookingForm');
 
@@ -346,6 +363,13 @@ heroBookingBtn.addEventListener('click', () => {
     bookingModal.classList.add('active');
     document.body.style.overflow = 'hidden';
 });
+
+if (headerBookingBtn) {
+    headerBookingBtn.addEventListener('click', () => {
+        bookingModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
 
 closeModal.addEventListener('click', () => {
     bookingModal.classList.remove('active');
@@ -440,11 +464,20 @@ document.addEventListener('keydown', (e) => {
 // === VOUCHER MODAL ===
 const voucherModal = document.getElementById('voucherModal');
 const voucherTrigger = document.getElementById('voucherTrigger');
+const headerVoucherLink = document.getElementById('headerVoucherLink');
 const closeVoucherModal = document.getElementById('closeVoucherModal');
 const voucherForm = document.getElementById('voucherForm');
 
 if (voucherTrigger) {
     voucherTrigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        voucherModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+}
+
+if (headerVoucherLink) {
+    headerVoucherLink.addEventListener('click', (e) => {
         e.preventDefault();
         voucherModal.classList.add('active');
         document.body.style.overflow = 'hidden';
