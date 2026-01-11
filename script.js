@@ -74,7 +74,10 @@ const translations = {
         voucher_recipient: "Name des Empfängers",
         voucher_email: "Deine E-Mail",
         voucher_submit: "Gutschein anfordern",
-        voucher_success: "Rechnung wird erstellt! Du erhältst den Gutschein nach Zahlungseingang per Mail."
+        voucher_success: "Rechnung wird erstellt! Du erhältst den Gutschein nach Zahlungseingang per Mail.",
+
+        // Appointment Slots
+        slots_headline: "Verfügbare Termine"
     },
     en: {
         // Hero
@@ -146,7 +149,10 @@ const translations = {
         voucher_recipient: "Recipient Name",
         voucher_email: "Your Email",
         voucher_submit: "Request Voucher",
-        voucher_success: "Invoice will be created! You will receive the gift card via email after payment is confirmed."
+        voucher_success: "Invoice will be created! You will receive the gift card via email after payment is confirmed.",
+
+        // Appointment Slots
+        slots_headline: "Available Slots"
     }
 };
 
@@ -390,6 +396,7 @@ bookingForm.addEventListener('submit', (e) => {
         email: document.getElementById('email').value,
         phone: document.getElementById('phone').value,
         artist: document.getElementById('artist').value,
+        selectedSlot: document.getElementById('selectedSlot').value,
         description: document.getElementById('description').value
     };
 
@@ -403,7 +410,108 @@ bookingForm.addEventListener('submit', (e) => {
     bookingForm.reset();
     bookingModal.classList.remove('active');
     document.body.style.overflow = 'auto';
+
+    // Clear slots
+    const slotsContainer = document.getElementById('slotsContainer');
+    slotsContainer.innerHTML = '';
+    slotsContainer.classList.remove('visible');
 });
+
+// === APPOINTMENT SLOT SELECTION ===
+// Mock artist schedules (keys match artist values)
+const artistSchedules = {
+    mike: [
+        "Mon, 13. Jan - 14:00",
+        "Tue, 14. Jan - 10:00",
+        "Wed, 15. Jan - 16:00",
+        "Thu, 16. Jan - 11:00",
+        "Fri, 17. Jan - 15:00"
+    ],
+    sarah: [
+        "Mon, 13. Jan - 10:00",
+        "Tue, 14. Jan - 14:00",
+        "Thu, 16. Jan - 09:00",
+        "Fri, 17. Jan - 13:00",
+        "Sat, 18. Jan - 11:00"
+    ],
+    alex: [
+        "Tue, 14. Jan - 15:00",
+        "Wed, 15. Jan - 10:00",
+        "Thu, 16. Jan - 14:00",
+        "Fri, 17. Jan - 12:00",
+        "Sat, 18. Jan - 10:00"
+    ],
+    nina: [
+        "Mon, 13. Jan - 11:00",
+        "Wed, 15. Jan - 14:00",
+        "Thu, 16. Jan - 10:00",
+        "Fri, 17. Jan - 16:00",
+        "Sat, 18. Jan - 13:00"
+    ]
+};
+
+// Listen for artist selection change
+const artistSelect = document.getElementById('artist');
+const slotsContainer = document.getElementById('slotsContainer');
+const selectedSlotInput = document.getElementById('selectedSlot');
+
+artistSelect.addEventListener('change', function () {
+    const selectedArtist = this.value;
+
+    // Clear previous slots and selection
+    slotsContainer.innerHTML = '';
+    selectedSlotInput.value = '';
+
+    // If an artist is selected, render their slots
+    if (selectedArtist && artistSchedules[selectedArtist]) {
+        const slots = artistSchedules[selectedArtist];
+
+        // Create headline
+        const headline = document.createElement('h3');
+        headline.className = 'slots-headline';
+        headline.textContent = translations[currentLang].slots_headline;
+        slotsContainer.appendChild(headline);
+
+        // Create grid container
+        const grid = document.createElement('div');
+        grid.className = 'slot-grid';
+
+        // Create slot buttons
+        slots.forEach(slot => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'slot-btn';
+            btn.textContent = slot;
+
+            // Click handler for slot selection
+            btn.addEventListener('click', function () {
+                // Remove active class from all slot buttons
+                document.querySelectorAll('.slot-btn').forEach(b => {
+                    b.classList.remove('active');
+                });
+
+                // Add active class to clicked button
+                this.classList.add('active');
+
+                // Save value to hidden input
+                selectedSlotInput.value = slot;
+            });
+
+            grid.appendChild(btn);
+        });
+
+        slotsContainer.appendChild(grid);
+
+        // Show container with fade-in
+        setTimeout(() => {
+            slotsContainer.classList.add('visible');
+        }, 10);
+    } else {
+        // Hide container if no artist selected
+        slotsContainer.classList.remove('visible');
+    }
+});
+
 
 // === PARALLAX EFFECT ON HERO ===
 const hero = document.querySelector('.hero');

@@ -532,7 +532,7 @@ body::before {
 /* Fix for select with disabled empty option */
 .form-group select:has(option[disabled]:checked)+label {
     top: 1rem;
-    color: rgba(240, 240, 240, 0.5);
+    color: var(--acid-green);
 }
 
 .form-group select:not(:has(option[disabled]:checked))+label,
@@ -551,9 +551,9 @@ body::before {
     color: var(--off-white);
 }
 
-/* Make selected text color green when valid */
+/* Keep selected text color as off-white */
 .form-group select:not(:has(option[disabled]:checked)) {
-    color: var(--acid-green);
+    color: var(--off-white);
 }
 
 .form-group textarea {
@@ -994,6 +994,67 @@ body::before {
     padding: 1rem 1.5rem;
     margin: 1.5rem 0;
     line-height: 1.6;
+}
+
+/* === APPOINTMENT SLOTS === */
+.slots-container {
+    margin: 2rem 0;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.slots-container.visible {
+    opacity: 1;
+    max-height: 1000px;
+}
+
+.slots-headline {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--acid-green);
+    margin-bottom: 1.5rem;
+}
+
+.slot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.slot-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    padding: 1rem 1.5rem;
+    background: transparent;
+    color: var(--off-white);
+    border: 1px solid var(--off-white);
+    cursor: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.slot-btn:hover {
+    border-color: var(--acid-green);
+    box-shadow: 0 0 10px rgba(204, 255, 0, 0.3);
+}
+
+.slot-btn.active {
+    background-color: var(--acid-green);
+    color: var(--almost-black);
+    border-color: var(--acid-green);
+}
+
+@media (max-width: 768px) {
+    .slot-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* === IMPROVED FORM LABEL POSITIONING === */
