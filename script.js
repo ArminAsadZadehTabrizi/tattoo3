@@ -157,12 +157,16 @@ const translations = {
 };
 
 // Get saved language or default to German
-let currentLang = localStorage.getItem('velvetink_lang') || 'de';
+let currentLang = localStorage.getItem('language') || 'de';
 
 // Function to change language
 function changeLanguage(lang) {
     currentLang = lang;
-    localStorage.setItem('velvetink_lang', lang);
+    localStorage.setItem('language', lang);
+
+    // Update body class for language-specific content visibility
+    document.body.classList.remove('lang-de', 'lang-en');
+    document.body.classList.add('lang-' + lang);
 
     // Update all elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
@@ -183,6 +187,9 @@ function changeLanguage(lang) {
 
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Apply body class immediately based on saved preference
+    document.body.classList.add('lang-' + currentLang);
+
     changeLanguage(currentLang);
 
     // Add event listeners to language buttons

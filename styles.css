@@ -1076,6 +1076,20 @@ body::before {
     color: var(--acid-green);
 }
 
+/* === LANGUAGE UTILITIES === */
+.lang-de,
+.lang-en {
+    display: none;
+}
+
+body.lang-de .lang-de {
+    display: block;
+}
+
+body.lang-en .lang-en {
+    display: block;
+}
+
 /* === RESPONSIVE === */
 @media (max-width: 768px) {
     body {
@@ -1139,5 +1153,12 @@ body::before {
     .footer-legal {
         flex-wrap: wrap;
         gap: 0.5rem;
+    }
+
+    /* Legal pages responsive typography */
+    .section-title,
+    h1 {
+        font-size: 2rem !important;
+        padding: 1rem 0;
     }
 }
