@@ -2,6 +2,23 @@
 // VELVET INK — Berlin Underground JavaScript
 // ========================================
 
+// === CRITICAL: IMMEDIATE LANGUAGE INITIALIZATION ===
+// Apply language class to body IMMEDIATELY to prevent white screen
+// This must happen before DOMContentLoaded to avoid CSS hiding content
+const savedLang = localStorage.getItem('language') || 'de';
+
+// Use DOMContentLoaded to ensure body exists, but also try immediately
+if (document.body) {
+    document.body.classList.add('lang-' + savedLang);
+} else {
+    // If body doesn't exist yet, wait for it
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('lang-' + savedLang);
+        });
+    }
+}
+
 // === TRANSLATION SYSTEM ===
 const translations = {
     de: {
@@ -156,8 +173,8 @@ const translations = {
     }
 };
 
-// Get saved language or default to German
-let currentLang = localStorage.getItem('language') || 'de';
+// Use the language that was already initialized at top of file
+let currentLang = savedLang;
 
 // Function to change language
 function changeLanguage(lang) {
@@ -187,9 +204,6 @@ function changeLanguage(lang) {
 
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Apply body class immediately based on saved preference
-    document.body.classList.add('lang-' + currentLang);
-
     changeLanguage(currentLang);
 
     // Add event listeners to language buttons
@@ -247,38 +261,41 @@ hoverables.forEach(el => {
 const filterButtons = document.querySelectorAll('.filter-btn');
 const portfolioItems = document.querySelectorAll('.portfolio-item');
 
-filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const filter = btn.getAttribute('data-filter');
+// Only run filter logic if filter buttons exist on the page
+if (filterButtons.length > 0) {
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const filter = btn.getAttribute('data-filter');
 
-        // Update active button
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+            // Update active button
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
 
-        // Filter items with smooth animation
-        portfolioItems.forEach(item => {
-            const category = item.getAttribute('data-category');
+            // Filter items with smooth animation
+            portfolioItems.forEach(item => {
+                const category = item.getAttribute('data-category');
 
-            if (filter === 'all' || category === filter) {
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.8)';
+                if (filter === 'all' || category === filter) {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
 
-                setTimeout(() => {
-                    item.classList.remove('hide');
-                    item.style.opacity = '1';
-                    item.style.transform = 'scale(1)';
-                }, 50);
-            } else {
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        item.classList.remove('hide');
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
 
-                setTimeout(() => {
-                    item.classList.add('hide');
-                }, 300);
-            }
+                    setTimeout(() => {
+                        item.classList.add('hide');
+                    }, 300);
+                }
+            });
         });
     });
-});
+}
 
 // === LIGHTBOX ===
 const lightbox = document.getElementById('lightbox');

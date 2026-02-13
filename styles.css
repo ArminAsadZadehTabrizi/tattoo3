@@ -130,6 +130,9 @@ body::before {
     letter-spacing: -0.02em;
     margin-bottom: clamp(2rem, 5vw, 4rem);
     line-height: 0.9;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 /* === CONTAINER === */
@@ -205,6 +208,12 @@ body::before {
     position: relative;
     overflow: hidden;
     transition: color 0.4s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+/* Hero-specific fade-in animation */
+.hero .cta-btn {
     opacity: 0;
     animation: fadeIn 1s ease 1.2s forwards;
 }
@@ -544,6 +553,15 @@ body::before {
 
 .form-group select {
     cursor: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 2rem;
+    padding-bottom: 1.2rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23F0F0F0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    background-size: 12px;
 }
 
 .form-group select option {
@@ -753,6 +771,8 @@ body::before {
     position: relative;
     overflow: hidden;
     transition: color 0.4s ease;
+    text-decoration: none;
+    display: inline-block;
 }
 
 .header-book-btn::before {
@@ -805,6 +825,29 @@ body::before {
 
 .lang-separator {
     color: rgba(240, 240, 240, 0.3);
+}
+
+/* === HEADER CENTER LINK (Solution B) === */
+.header-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header-center-link {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--off-white);
+    text-decoration: none;
+    cursor: none;
+    transition: color 0.3s ease;
+}
+
+.header-center-link:hover {
+    color: var(--acid-green);
 }
 
 /* === INSTAGRAM SECTION === */
@@ -1077,16 +1120,24 @@ body::before {
 }
 
 /* === LANGUAGE UTILITIES === */
-.lang-de,
-.lang-en {
-    display: none;
+/* Hide language-specific content by default */
+body:not(.lang-de) .lang-de,
+body:not(.lang-en) .lang-en {
+    display: none !important;
 }
 
+/* Show German content when body has lang-de class */
 body.lang-de .lang-de {
     display: block;
 }
 
+/* Show English content when body has lang-en class */
 body.lang-en .lang-en {
+    display: block;
+}
+
+/* CRITICAL FALLBACK: Show German by default if JS fails */
+body:not(.lang-de):not(.lang-en) .lang-de {
     display: block;
 }
 
