@@ -41,7 +41,7 @@ const translations = {
         filter_illustrative: "Illustrativ",
 
         // Instagram
-        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @VELVET.INK",
+        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @AT_DIGITAL_",
 
         // Aftercare
         aftercare_title: "Pflege",
@@ -116,7 +116,7 @@ const translations = {
         filter_illustrative: "Illustrative",
 
         // Instagram
-        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @VELVET.INK",
+        instagram_banner: "CHECK INSTAGRAM FOR DAILY DROPS // @AT_DIGITAL_",
 
         // Aftercare
         aftercare_title: "Aftercare",
