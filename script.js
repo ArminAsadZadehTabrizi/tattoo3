@@ -215,6 +215,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// === MOBILE HAMBURGER MENU ===
+const hamburgerBtn = document.getElementById('hamburgerBtn');
+const mobileMenu = document.getElementById('mobileMenu');
+const mobileBookingBtn = document.getElementById('mobileBookingBtn');
+const mobileVoucherLink = document.getElementById('mobileVoucherLink');
+
+if (hamburgerBtn && mobileMenu) {
+    // Toggle mobile menu
+    hamburgerBtn.addEventListener('click', () => {
+        const isOpen = mobileMenu.classList.contains('active');
+        hamburgerBtn.classList.toggle('active');
+        mobileMenu.classList.toggle('active');
+        hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+        document.body.style.overflow = isOpen ? '' : 'hidden';
+    });
+
+    // Close menu when any nav link is clicked
+    mobileMenu.querySelectorAll('.mobile-menu-link').forEach(link => {
+        link.addEventListener('click', () => {
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = '';
+        });
+    });
+
+    // Mobile "Book" button opens booking modal and closes menu
+    if (mobileBookingBtn) {
+        mobileBookingBtn.addEventListener('click', () => {
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = 'hidden';
+            const bookingModal = document.getElementById('bookingModal');
+            if (bookingModal) bookingModal.classList.add('active');
+        });
+    }
+
+    // Mobile "Gutscheine" link opens voucher modal and closes menu
+    if (mobileVoucherLink) {
+        mobileVoucherLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            hamburgerBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            hamburgerBtn.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = 'hidden';
+            const voucherModal = document.getElementById('voucherModal');
+            if (voucherModal) voucherModal.classList.add('active');
+        });
+    }
+
+    // Language buttons inside mobile menu
+    mobileMenu.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            changeLanguage(lang);
+
+            // Sync active state on ALL lang-btn elements (header + mobile menu)
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.getAttribute('data-lang') === lang) {
+                    b.classList.add('active');
+                }
+            });
+        });
+    });
+}
+
+// Close mobile menu on Escape key (added to existing keydown handler below)
+function closeMobileMenu() {
+    if (hamburgerBtn && mobileMenu && mobileMenu.classList.contains('active')) {
+        hamburgerBtn.classList.remove('active');
+        mobileMenu.classList.remove('active');
+        hamburgerBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+}
+
 // === CUSTOM CURSOR ===
 const cursor = document.querySelector('.cursor');
 const cursorFollower = document.querySelector('.cursor-follower');
@@ -566,8 +644,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 // === KEYBOARD CONTROLS ===
 document.addEventListener('keydown', (e) => {
-    // Escape key to close modals
+    // Escape key to close modals and mobile menu
     if (e.key === 'Escape') {
+        closeMobileMenu();
         if (bookingModal.classList.contains('active')) {
             bookingModal.classList.remove('active');
             document.body.style.overflow = 'auto';

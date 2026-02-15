@@ -46,8 +46,29 @@
                     <button class="lang-btn" data-lang="en">EN</button>
                 </div>
             </div>
+            <!-- Mobile Hamburger Button -->
+            <button class="hamburger" id="hamburgerBtn" aria-label="Open menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Fullscreen Menu Overlay -->
+    <div class="mobile-menu" id="mobileMenu">
+        <nav class="mobile-menu-nav">
+            <a href="portfolio.html" class="mobile-menu-link">Portfolio</a>
+            <a href="#" class="mobile-menu-link" id="mobileVoucherLink" data-i18n="header_vouchers">Gutscheine</a>
+            <a href="https://www.instagram.com/at_digital_" target="_blank" class="mobile-menu-link">Instagram</a>
+            <button class="mobile-menu-book" id="mobileBookingBtn" data-i18n="header_book">Buchen</button>
+            <div class="mobile-menu-lang">
+                <button class="lang-btn active" data-lang="de">DE</button>
+                <span class="lang-separator">|</span>
+                <button class="lang-btn" data-lang="en">EN</button>
+            </div>
+        </nav>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
